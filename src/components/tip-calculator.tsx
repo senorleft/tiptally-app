@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
-import { DollarSign, Minus, Plus, Users, Percent } from 'lucide-react';
+import { DollarSign, Minus, Plus, Users } from 'lucide-react';
 
 export default function TipCalculator() {
   const [bill, setBill] = useState('');
@@ -19,7 +19,7 @@ export default function TipCalculator() {
 
   const tipAmount = useMemo(() => {
     if (activeTip === 'custom') {
-      return billAmount * (customTipAmount / 100);
+      return customTipAmount;
     }
     return billAmount * (tipPercent / 100);
   }, [billAmount, tipPercent, customTipAmount, activeTip]);
@@ -47,7 +47,7 @@ export default function TipCalculator() {
   const handleCustomTipChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/[^0-9.]/g, '');
     setCustomTip(value);
-    setTipPercent(parseFloat(value) || 0);
+    setTipPercent(0);
     setActiveTip('custom');
   };
   
@@ -104,7 +104,7 @@ export default function TipCalculator() {
                 <Button onClick={() => handleTipSelect(15, '15')} variant={activeTip === '15' ? 'default' : 'secondary'} className="h-12 text-lg font-bold">15%</Button>
                 <Button onClick={() => handleTipSelect(20, '20')} variant={activeTip === '20' ? 'default' : 'secondary'} className="h-12 text-lg font-bold">20%</Button>
                 <div className="relative">
-                    <Percent className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                    <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                     <Input 
                         placeholder="Custom" 
                         type="text"
@@ -138,18 +138,12 @@ export default function TipCalculator() {
           <div className="bg-primary text-primary-foreground flex flex-col justify-between p-8 rounded-t-3xl mt-4">
             <div className="space-y-6">
               <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-lg font-semibold">Tip Amount</p>
-                  <p className="text-sm opacity-80">/ person</p>
-                </div>
+                <p className="text-lg font-semibold">Tip / Person</p>
                 <p className="text-3xl md:text-4xl font-bold tracking-tight">{formatCurrency(tipPerPerson)}</p>
               </div>
               
               <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-lg font-semibold">Total</p>
-                  <p className="text-sm opacity-80">/ person</p>
-                </div>
+                <p className="text-lg font-semibold">Total / Person</p>
                 <p className="text-3xl md:text-4xl font-bold tracking-tight">{formatCurrency(totalPerPerson)}</p>
               </div>
 
