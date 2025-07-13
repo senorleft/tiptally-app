@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
-import { DollarSign, Minus, Plus, Users } from 'lucide-react';
+import { DollarSign, Minus, Plus, Users, Percent } from 'lucide-react';
 
 export default function TipCalculator() {
   const [bill, setBill] = useState('');
@@ -19,7 +19,7 @@ export default function TipCalculator() {
 
   const tipAmount = useMemo(() => {
     if (activeTip === 'custom') {
-      return customTipAmount;
+      return billAmount * (customTipAmount / 100);
     }
     return billAmount * (tipPercent / 100);
   }, [billAmount, tipPercent, customTipAmount, activeTip]);
@@ -47,6 +47,7 @@ export default function TipCalculator() {
   const handleCustomTipChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/[^0-9.]/g, '');
     setCustomTip(value);
+    setTipPercent(parseFloat(value) || 0);
     setActiveTip('custom');
   };
   
@@ -76,14 +77,14 @@ export default function TipCalculator() {
   return (
     <div className="w-full max-w-lg mx-auto font-body">
       <h1 className="text-4xl font-extrabold text-center mb-8 font-headline text-foreground/80 tracking-widest uppercase">TipTop</h1>
-      <Card className="bg-card rounded-3xl shadow-2xl p-0 overflow-hidden">
+      <Card className="bg-card rounded-3xl shadow-2xl p-0 overflow-hidden w-full">
         <div className="flex flex-col">
-          {/* Top side: Inputs */}
+          {/* Inputs */}
           <div className="p-8 space-y-8">
             <div className="space-y-2">
               <Label htmlFor="bill" className="text-md text-muted-foreground font-semibold">Bill</Label>
               <div className="relative">
-                <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 h-8 w-8 text-muted-foreground" />
                 <Input
                   id="bill"
                   type="text"
@@ -91,26 +92,26 @@ export default function TipCalculator() {
                   placeholder="0.00"
                   value={bill}
                   onChange={handleBillChange}
-                  className="text-2xl font-bold text-right h-14 pl-12 rounded-lg bg-muted/50 border-0 focus-visible:ring-primary focus-visible:ring-2"
+                  className="text-5xl font-bold text-left h-20 pl-16 rounded-lg bg-input border-0 focus-visible:ring-primary focus-visible:ring-2"
                 />
               </div>
             </div>
             
             <div className="space-y-4">
               <Label className="text-md text-muted-foreground font-semibold">Select Tip</Label>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              <div className="grid grid-cols-2 gap-3">
                 <Button onClick={() => handleTipSelect(10, '10')} variant={activeTip === '10' ? 'default' : 'secondary'} className="h-12 text-lg font-bold">10%</Button>
                 <Button onClick={() => handleTipSelect(15, '15')} variant={activeTip === '15' ? 'default' : 'secondary'} className="h-12 text-lg font-bold">15%</Button>
                 <Button onClick={() => handleTipSelect(20, '20')} variant={activeTip === '20' ? 'default' : 'secondary'} className="h-12 text-lg font-bold">20%</Button>
-                <div className="relative col-span-2 sm:col-span-3">
-                    <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                <div className="relative">
+                    <Percent className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                     <Input 
-                        placeholder="Custom Amount" 
+                        placeholder="Custom" 
                         type="text"
                         inputMode="decimal"
                         value={customTip}
                         onChange={handleCustomTipChange}
-                        className="text-lg font-bold text-center h-12 rounded-lg bg-muted/50 border-0 focus-visible:ring-primary focus-visible:ring-2 pl-12"
+                        className="text-lg font-bold text-center h-12 rounded-lg bg-input border-0 focus-visible:ring-primary focus-visible:ring-2 pl-12"
                     />
                 </div>
               </div>
@@ -118,26 +119,24 @@ export default function TipCalculator() {
 
             <div className="space-y-2">
               <Label htmlFor="people" className="text-md text-muted-foreground font-semibold">Number of People</Label>
-              <div className="relative">
-                <div className="flex items-center justify-between bg-muted/50 h-14 rounded-lg px-4">
-                  <Button variant="ghost" size="icon" onClick={() => setPeople(p => Math.max(1, p - 1))} aria-label="Decrement number of people" className="text-primary hover:text-primary rounded-full">
-                    <Minus className="h-5 w-5" />
-                  </Button>
-                  <div className='flex items-center gap-2'>
-                    <Users className="h-5 w-5 text-muted-foreground" />
-                    <span id="people" className="text-2xl font-bold tabular-nums">{people}</span>
-                  </div>
-                  <Button variant="ghost" size="icon" onClick={() => setPeople(p => p + 1)} aria-label="Increment number of people" className="text-primary hover:text-primary rounded-full">
-                    <Plus className="h-5 w-5" />
-                  </Button>
+              <div className="flex items-center justify-between bg-input h-14 rounded-lg px-4">
+                <Button variant="ghost" size="icon" onClick={() => setPeople(p => Math.max(1, p - 1))} aria-label="Decrement number of people" className="text-primary hover:text-primary rounded-full">
+                  <Minus className="h-5 w-5" />
+                </Button>
+                <div className='flex items-center gap-2'>
+                  <Users className="h-5 w-5 text-muted-foreground" />
+                  <span id="people" className="text-2xl font-bold tabular-nums">{people}</span>
                 </div>
+                <Button variant="ghost" size="icon" onClick={() => setPeople(p => p + 1)} aria-label="Increment number of people" className="text-primary hover:text-primary rounded-full">
+                  <Plus className="h-5 w-5" />
+                </Button>
               </div>
             </div>
           </div>
           
-          {/* Bottom side: Results */}
-          <div className="bg-primary text-primary-foreground flex flex-col justify-between p-8 rounded-t-3xl">
-            <div className="space-y-10">
+          {/* Results */}
+          <div className="bg-primary text-primary-foreground flex flex-col justify-between p-8 rounded-t-3xl mt-4">
+            <div className="space-y-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-lg font-semibold">Tip Amount</p>
