@@ -76,7 +76,7 @@ export default function TipCalculator() {
 
   return (
     <div className="w-full max-w-lg mx-auto font-body">
-      <h1 className="text-4xl font-extrabold text-center mb-8 font-headline text-foreground/80 tracking-widest uppercase">TipTop</h1>
+      <h1 className="text-4xl font-extrabold text-center mb-8 font-headline text-foreground/80 tracking-widest uppercase">TipTally</h1>
       <Card className="bg-card rounded-3xl shadow-2xl p-0 overflow-hidden w-full">
         <div className="flex flex-col">
           {/* Inputs */}

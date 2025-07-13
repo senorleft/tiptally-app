@@ -3,7 +3,7 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: 'TipTop | Tip Calculator',
+  title: 'TipTally | Tip Calculator',
   description: 'A modern, mobile-first tip calculator built with Next.js.',
 };
 
