@@ -15,16 +15,14 @@ export default function TipCalculator() {
   const [activeTip, setActiveTip] = useState<'10' | '15' | '20' | 'custom'>('15');
 
   const billAmount = useMemo(() => parseFloat(bill) || 0, [bill]);
-  const finalTipPercent = useMemo(() => {
-    if (activeTip === 'custom') {
-      return parseFloat(customTip) || 0;
-    }
-    return tipPercent;
-  }, [activeTip, customTip, tipPercent]);
+  const customTipAmount = useMemo(() => parseFloat(customTip) || 0, [customTip]);
 
   const tipAmount = useMemo(() => {
-    return billAmount * (finalTipPercent / 100);
-  }, [billAmount, finalTipPercent]);
+    if (activeTip === 'custom') {
+      return customTipAmount;
+    }
+    return billAmount * (tipPercent / 100);
+  }, [billAmount, tipPercent, customTipAmount, activeTip]);
 
   const totalAmount = useMemo(() => {
     return billAmount + tipAmount;
@@ -76,11 +74,11 @@ export default function TipCalculator() {
   };
 
   return (
-    <div className="w-full max-w-lg md:max-w-4xl mx-auto font-body">
+    <div className="w-full max-w-lg mx-auto font-body">
       <h1 className="text-4xl font-extrabold text-center mb-8 font-headline text-foreground/80 tracking-widest uppercase">TipTop</h1>
       <Card className="bg-card rounded-3xl shadow-2xl p-0 overflow-hidden">
-        <div className="grid grid-cols-1 md:grid-cols-2">
-          {/* Left side: Inputs */}
+        <div className="flex flex-col">
+          {/* Top side: Inputs */}
           <div className="p-8 space-y-8">
             <div className="space-y-2">
               <Label htmlFor="bill" className="text-md text-muted-foreground font-semibold">Bill</Label>
@@ -99,19 +97,22 @@ export default function TipCalculator() {
             </div>
             
             <div className="space-y-4">
-              <Label className="text-md text-muted-foreground font-semibold">Select Tip %</Label>
+              <Label className="text-md text-muted-foreground font-semibold">Select Tip</Label>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 <Button onClick={() => handleTipSelect(10, '10')} variant={activeTip === '10' ? 'default' : 'secondary'} className="h-12 text-lg font-bold">10%</Button>
                 <Button onClick={() => handleTipSelect(15, '15')} variant={activeTip === '15' ? 'default' : 'secondary'} className="h-12 text-lg font-bold">15%</Button>
                 <Button onClick={() => handleTipSelect(20, '20')} variant={activeTip === '20' ? 'default' : 'secondary'} className="h-12 text-lg font-bold">20%</Button>
-                <Input 
-                    placeholder="Custom" 
-                    type="text"
-                    inputMode="decimal"
-                    value={customTip}
-                    onChange={handleCustomTipChange}
-                    className="text-lg text-center h-12 col-span-2 sm:col-span-3 rounded-lg bg-muted/50 border-0 focus-visible:ring-primary focus-visible:ring-2"
-                />
+                <div className="relative col-span-2 sm:col-span-3">
+                    <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                    <Input 
+                        placeholder="Custom Amount" 
+                        type="text"
+                        inputMode="decimal"
+                        value={customTip}
+                        onChange={handleCustomTipChange}
+                        className="text-lg font-bold text-center h-12 rounded-lg bg-muted/50 border-0 focus-visible:ring-primary focus-visible:ring-2 pl-12"
+                    />
+                </div>
               </div>
             </div>
 
@@ -134,8 +135,8 @@ export default function TipCalculator() {
             </div>
           </div>
           
-          {/* Right side: Results */}
-          <div className="bg-primary text-primary-foreground flex flex-col justify-between p-8 rounded-t-3xl md:rounded-l-none md:rounded-r-3xl">
+          {/* Bottom side: Results */}
+          <div className="bg-primary text-primary-foreground flex flex-col justify-between p-8 rounded-t-3xl">
             <div className="space-y-10">
               <div className="flex items-center justify-between">
                 <div>
@@ -164,7 +165,8 @@ export default function TipCalculator() {
             <Button 
                 variant="secondary" 
                 className="w-full mt-8 h-14 text-xl font-bold bg-accent text-accent-foreground transition-transform hover:scale-105 active:scale-100 hover:bg-accent/90 focus-visible:bg-accent/90"
-                onClick={resetAll}>
+                onClick={resetAll}
+                disabled={billAmount === 0}>
                 Reset
             </Button>
           </div>
