@@ -2,6 +2,27 @@
 
 This document summarizes the discussions and implemented changes for the TipTally calculator app, focusing on mobile-friendliness, user experience (UX), user interface (UI) optimization, and security.
 
+## Session 2: August 11, 2025
+
+**Goal:** Optimize the web app for speed and security. Make sure inputs are sanitized and ensure that the app fits within the screen size.
+
+**Implemented Changes:**
+*   **Layout and Scrolling:**
+    *   Fixed the vertical scrolling issue by changing `h-screen` to `min-h-screen` in `src/app/page.tsx`.
+    *   Adjusted the layout in `src/components/tip-calculator.tsx` to be more compact and mobile-friendly.
+*   **Performance:**
+    *   Optimized font loading by implementing `next/font` in `src/app/layout.tsx` and updating `tailwind.config.ts`.
+*   **UI/UX and Theming:**
+    *   Updated the color palette in `src/app/globals.css` with a modern, vibrant theme that supports both light and dark modes.
+*   **Code Quality:**
+    *   Refactored the input handling logic in `src/components/tip-calculator.tsx` to be more robust and maintainable.
+    *   Removed the unnecessary `useEffect` for dark mode detection.
+    *   Updated font class names to match the new configuration.
+
+---
+
+## Session 1: Previous Session
+
 ## 1. Custom Tip Functionality
 
 **Original State:** The "Custom" tip input was treated as a direct dollar amount, which could be confusing for users expecting a percentage.
@@ -12,7 +33,7 @@ This document summarizes the discussions and implemented changes for the TipTall
 *   Introduced a `customTipMode` state (`'percent' | 'dollar'`) to manage the custom tip input type.
 *   Modified the `tipAmount` calculation to correctly interpret the `customTip` value based on `customTipMode`.
 *   Added a `Switch` component to allow users to toggle between percentage and dollar input for custom tips.
-*   The custom tip input field now dynamically displays either a `$` or `%` icon based on the selected `customTipMode`.
+*   The custom tip input field now dynamically displays either a ` or `%` icon based on the selected `customTipMode`.
 
 ## 2. UI/UX and Layout Optimization
 
@@ -91,7 +112,7 @@ This document summarizes the discussions and implemented changes for the TipTall
 
 ## Remaining Tasks (for future reference)
 
-*   Address npm warnings and vulnerabilities (as seen during `npm install`).
+*   Address npm warnings and vulnerabilities (as seen during `npm install`). - **Addressed on August 11, 2025**
 *   Further performance optimizations (e.g., code splitting, if necessary, beyond Next.js defaults).
 
 This summary can be used to re-prompt the Gemini CLI when you have more credits, ensuring continuity of the development process.
