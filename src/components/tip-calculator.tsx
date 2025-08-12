@@ -175,21 +175,28 @@ export default function TipCalculator() {
           
           {/* Results */}
           <div className="bg-primary text-primary-foreground flex flex-col justify-between p-4 rounded-t-2xl mt-1">
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <p className="text-base font-semibold">Tip / Person</p>
-                <p className="text-2xl md:text-3xl font-bold tracking-tight">{formatCurrency(tipPerPerson)}</p>
-              </div>
-              
-              <div className="flex items-center justify-between">
-                <p className="text-base font-semibold">Total / Person</p>
-                <p className="text-2xl md:text-3xl font-bold tracking-tight">{formatCurrency(totalPerPerson)}</p>
+            <div className="space-y-4">
+              <div>
+                <p className="text-base font-semibold mb-2 text-center">Per Person</p>
+                <div className="flex items-center justify-between">
+                  <p className="text-base font-semibold">Tip</p>
+                  <p className="text-2xl font-bold tracking-tight">{formatCurrency(tipPerPerson)}</p>
+                </div>
+                <div className="flex items-center justify-between">
+                  <p className="text-base font-semibold">Total</p>
+                  <p className="text-2xl font-bold tracking-tight">{formatCurrency(totalPerPerson)}</p>
+                </div>
               </div>
 
-              <div className="border-t border-primary-foreground/20 pt-3 space-y-2">
-                  <div className="flex items-center justify-between font-bold">
-                      <p>Total Bill</p>
-                      <p className="text-xl">{formatCurrency(totalAmount)}</p>
+              <div className="border-t border-primary-foreground/20 pt-4 space-y-2">
+                <p className="text-base font-semibold mb-2 text-center">Totals</p>
+                  <div className="flex items-center justify-between">
+                      <p className="text-base font-semibold">Tip</p>
+                      <p className="text-2xl font-bold tracking-tight">{formatCurrency(tipAmount)}</p>
+                  </div>
+                  <div className="flex items-center justify-between">
+                      <p className="text-base font-semibold">Bill</p>
+                      <p className="text-2xl font-bold tracking-tight">{formatCurrency(totalAmount)}</p>
                   </div>
               </div>
             </div>
