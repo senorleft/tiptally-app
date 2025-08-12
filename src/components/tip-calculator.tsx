@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -60,34 +60,20 @@ export default function TipCalculator() {
     setCustomTip('');
   };
 
+  const handleInputChange = (setter: (value: string) => void) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    const sanitizedValue = value.replace(/[^0-9.]/g, '');
+    const decimalParts = sanitizedValue.split('.');
+    if (decimalParts.length > 2) {
+      return;
+    }
+    setter(sanitizedValue);
+  };
+
   const handleCustomTipChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value.replace(/[^0-9.]/g, '');
-    // Ensure only one decimal point
-    const parts = value.split('.');
-    if (parts.length > 2) {
-      value = parts[0] + '.' + parts.slice(1).join('');
-    }
-    // Prevent multiple leading zeros unless it's "0."
-    if (value.length > 1 && value[0] === '0' && value[1] !== '.') {
-      value = value.substring(1);
-    }
-    setCustomTip(value);
+    handleInputChange(setCustomTip)(e);
     setTipPercent(0);
     setActiveTip('custom');
-  };
-  
-  const handleBillChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value.replace(/[^0-9.]/g, '');
-    // Ensure only one decimal point
-    const parts = value.split('.');
-    if (parts.length > 2) {
-      value = parts[0] + '.' + parts.slice(1).join('');
-    }
-    // Prevent multiple leading zeros unless it's "0."
-    if (value.length > 1 && value[0] === '0' && value[1] !== '.') {
-      value = value.substring(1);
-    }
-    setBill(value);
   };
 
   const handlePeopleChange = (change: number) => {
@@ -114,15 +100,8 @@ export default function TipCalculator() {
     }).format(value);
   };
 
-  useEffect(() => {
-    const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark');
-    }
-  }, []);
-
   return (
-    <div className="w-full max-w-md mx-auto font-body">
+    <div className="w-full max-w-md mx-auto font-sans">
       <h1 className="text-2xl font-extrabold text-center mb-4 font-headline text-foreground/80 tracking-widest uppercase">TipTally</h1>
       <Card className="bg-card rounded-2xl shadow-lg p-0 overflow-hidden w-full">
         <div className="flex flex-col">
@@ -138,7 +117,7 @@ export default function TipCalculator() {
                   inputMode="decimal"
                   placeholder="0.00"
                   value={bill}
-                  onChange={handleBillChange}
+                  onChange={handleInputChange(setBill)}
                   className="text-3xl font-bold text-left h-14 pl-10 rounded-md bg-input border-0 focus-visible:ring-primary focus-visible:ring-2"
                 />
               </div>
