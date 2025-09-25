@@ -101,12 +101,12 @@ export default function TipCalculator() {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto font-sans h-full flex flex-col">
-      <h1 className="text-xl font-extrabold text-center mb-2 font-headline text-foreground/80 tracking-widest uppercase">TipTally</h1>
-      <Card className="bg-card rounded-2xl shadow-lg p-0 overflow-hidden w-full flex-1 flex flex-col max-h-full">
-        <div className="flex flex-col h-full">
+    <div className="w-full max-w-md mx-auto font-sans">
+      <h1 className="text-xl font-extrabold text-center mb-3 font-headline text-foreground/80 tracking-widest uppercase">TipTally</h1>
+      <Card className="bg-card rounded-2xl shadow-lg p-0 overflow-hidden w-full">
+        <div className="flex flex-col">
           {/* Inputs */}
-          <div className="p-3 space-y-3 flex-1">
+          <div className="p-3 space-y-2">
             <div className="space-y-1">
               <Label htmlFor="bill" className="text-sm text-muted-foreground font-semibold">Bill</Label>
               <div className="relative">
@@ -123,7 +123,7 @@ export default function TipCalculator() {
               </div>
             </div>
             
-            <div className="space-y-2">
+            <div className="space-y-1">
               <Label className="text-sm text-muted-foreground font-semibold">Select Tip</Label>
               <div className="grid grid-cols-2 gap-2">
                 <Button onClick={() => handleTipSelect(10, '10')} variant={activeTip === '10' ? 'default' : 'secondary'} className="h-9 text-sm font-bold">10%</Button>
@@ -146,7 +146,7 @@ export default function TipCalculator() {
                     />
                 </div>
               </div>
-              <div className="flex items-center justify-center space-x-2 pt-1">
+              <div className="flex items-center justify-center space-x-2">
                 <Label htmlFor="custom-tip-mode" className="text-xs text-muted-foreground">Tip in $</Label>
                 <Switch
                   id="custom-tip-mode"
@@ -174,8 +174,8 @@ export default function TipCalculator() {
           </div>
           
           {/* Results */}
-          <div className="bg-primary text-primary-foreground flex flex-col p-3 rounded-t-2xl mt-1">
-            <div className="space-y-3">
+          <div className="bg-primary text-primary-foreground flex flex-col p-3 rounded-t-2xl">
+            <div className="space-y-2">
               <div>
                 <p className="text-sm font-semibold mb-1 text-center">Per Person</p>
                 <div className="flex items-center justify-between">
@@ -203,7 +203,7 @@ export default function TipCalculator() {
 
             <Button
                 variant="secondary"
-                className="w-full mt-3 h-9 text-base font-bold bg-accent text-accent-foreground transition-transform hover:scale-105 active:scale-100 hover:bg-accent/90 focus-visible:bg-accent/90"
+                className="w-full mt-2 h-9 text-base font-bold bg-accent text-accent-foreground transition-transform hover:scale-105 active:scale-100 hover:bg-accent/90 focus-visible:bg-accent/90"
                 onClick={resetAll}
                 disabled={billAmount === 0}>
                 Reset

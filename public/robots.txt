@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+Disallow: /wp-content/
+Disallow: /wp-json/
+Disallow: /xmlrpc.php
+
+# Site specific
+Sitemap: https://tiptally.app/sitemap.xml
