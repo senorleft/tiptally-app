@@ -36,7 +36,9 @@ const thumbVariants = cva(
 
 const Switch = React.forwardRef<
   React.ElementRef<typeof SwitchPrimitives.Root>,
-  React.ComponentPropsWithoutRef<typeof SwitchPrimitives.Root>
+  React.ComponentPropsWithoutRef<typeof SwitchPrimitives.Root> & {
+    variant?: "default"
+  }
 >(({ className, variant, ...props }, ref) => (
   <SwitchPrimitives.Root
     className={cn(switchVariants({ variant }), className)}

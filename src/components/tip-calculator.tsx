@@ -101,12 +101,12 @@ export default function TipCalculator() {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto font-sans">
-      <h1 className="text-2xl font-extrabold text-center mb-4 font-headline text-foreground/80 tracking-widest uppercase">TipTally</h1>
-      <Card className="bg-card rounded-2xl shadow-lg p-0 overflow-hidden w-full">
-        <div className="flex flex-col">
+    <div className="w-full max-w-md mx-auto font-sans h-full flex flex-col">
+      <h1 className="text-xl font-extrabold text-center mb-2 font-headline text-foreground/80 tracking-widest uppercase">TipTally</h1>
+      <Card className="bg-card rounded-2xl shadow-lg p-0 overflow-hidden w-full flex-1 flex flex-col max-h-full">
+        <div className="flex flex-col h-full">
           {/* Inputs */}
-          <div className="p-4 space-y-4">
+          <div className="p-3 space-y-3 flex-1">
             <div className="space-y-1">
               <Label htmlFor="bill" className="text-sm text-muted-foreground font-semibold">Bill</Label>
               <div className="relative">
@@ -118,7 +118,7 @@ export default function TipCalculator() {
                   placeholder="0.00"
                   value={bill}
                   onChange={handleInputChange(setBill)}
-                  className="text-3xl font-bold text-left h-14 pl-10 rounded-md bg-input border-0 focus-visible:ring-primary focus-visible:ring-2"
+                  className="text-2xl font-bold text-left h-12 pl-10 rounded-md bg-input border-0 focus-visible:ring-primary focus-visible:ring-2"
                 />
               </div>
             </div>
@@ -126,28 +126,28 @@ export default function TipCalculator() {
             <div className="space-y-2">
               <Label className="text-sm text-muted-foreground font-semibold">Select Tip</Label>
               <div className="grid grid-cols-2 gap-2">
-                <Button onClick={() => handleTipSelect(10, '10')} variant={activeTip === '10' ? 'default' : 'secondary'} className="h-10 text-base font-bold">10%</Button>
-                <Button onClick={() => handleTipSelect(15, '15')} variant={activeTip === '15' ? 'default' : 'secondary'} className="h-10 text-base font-bold">15%</Button>
-                <Button onClick={() => handleTipSelect(20, '20')} variant={activeTip === '20' ? 'default' : 'secondary'} className="h-10 text-base font-bold">20%</Button>
+                <Button onClick={() => handleTipSelect(10, '10')} variant={activeTip === '10' ? 'default' : 'secondary'} className="h-9 text-sm font-bold">10%</Button>
+                <Button onClick={() => handleTipSelect(15, '15')} variant={activeTip === '15' ? 'default' : 'secondary'} className="h-9 text-sm font-bold">15%</Button>
+                <Button onClick={() => handleTipSelect(20, '20')} variant={activeTip === '20' ? 'default' : 'secondary'} className="h-9 text-sm font-bold">20%</Button>
                 <div className="relative">
                     {customTipMode === 'dollar' ? (
                       <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     ) : (
                       <Percent className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     )}
-                    <Input 
-                        placeholder="Custom" 
+                    <Input
+                        placeholder="Custom"
                         type="text"
                         inputMode="decimal"
                         value={customTip}
                         onChange={handleCustomTipChange}
                         aria-label="Custom tip"
-                        className="text-base font-bold text-center h-10 rounded-md bg-input border-0 focus-visible:ring-primary focus-visible:ring-2 pl-10"
+                        className="text-sm font-bold text-center h-9 rounded-md bg-input border-0 focus-visible:ring-primary focus-visible:ring-2 pl-10"
                     />
                 </div>
               </div>
-              <div className="flex items-center justify-center space-x-2 pt-2">
-                <Label htmlFor="custom-tip-mode" className="text-sm text-muted-foreground">Tip in $</Label>
+              <div className="flex items-center justify-center space-x-2 pt-1">
+                <Label htmlFor="custom-tip-mode" className="text-xs text-muted-foreground">Tip in $</Label>
                 <Switch
                   id="custom-tip-mode"
                   checked={customTipMode === 'dollar'}
@@ -158,13 +158,13 @@ export default function TipCalculator() {
 
             <div className="space-y-1">
               <Label htmlFor="people" className="text-sm text-muted-foreground font-semibold">Number of People</Label>
-              <div className="flex items-center justify-between bg-input h-11 rounded-md px-3">
+              <div className="flex items-center justify-between bg-input h-10 rounded-md px-3">
                 <Button variant="ghost" size="icon" onClick={() => handlePeopleChange(-1)} aria-label="Decrement number of people" className="text-primary hover:text-primary rounded-full">
                   <Minus className="h-4 w-4" />
                 </Button>
                 <div className='flex items-center gap-2'>
                   <Users className="h-4 w-4 text-muted-foreground" />
-                  <span id="people" className="text-xl font-bold tabular-nums">{people}</span>
+                  <span id="people" className="text-lg font-bold tabular-nums">{people}</span>
                 </div>
                 <Button variant="ghost" size="icon" onClick={() => handlePeopleChange(1)} aria-label="Increment number of people" className="text-primary hover:text-primary rounded-full">
                   <Plus className="h-4 w-4" />
@@ -174,36 +174,36 @@ export default function TipCalculator() {
           </div>
           
           {/* Results */}
-          <div className="bg-primary text-primary-foreground flex flex-col justify-between p-4 rounded-t-2xl mt-1">
-            <div className="space-y-4">
+          <div className="bg-primary text-primary-foreground flex flex-col p-3 rounded-t-2xl mt-1">
+            <div className="space-y-3">
               <div>
-                <p className="text-base font-semibold mb-2 text-center">Per Person</p>
+                <p className="text-sm font-semibold mb-1 text-center">Per Person</p>
                 <div className="flex items-center justify-between">
-                  <p className="text-base font-semibold">Tip</p>
-                  <p className="text-2xl font-bold tracking-tight">{formatCurrency(tipPerPerson)}</p>
+                  <p className="text-sm font-semibold">Tip</p>
+                  <p className="text-xl font-bold tracking-tight">{formatCurrency(tipPerPerson)}</p>
                 </div>
                 <div className="flex items-center justify-between">
-                  <p className="text-base font-semibold">Total</p>
-                  <p className="text-2xl font-bold tracking-tight">{formatCurrency(totalPerPerson)}</p>
+                  <p className="text-sm font-semibold">Total</p>
+                  <p className="text-xl font-bold tracking-tight">{formatCurrency(totalPerPerson)}</p>
                 </div>
               </div>
 
-              <div className="border-t border-primary-foreground/20 pt-4 space-y-2">
-                <p className="text-base font-semibold mb-2 text-center">Totals</p>
+              <div className="border-t border-primary-foreground/20 pt-2 space-y-1">
+                <p className="text-sm font-semibold mb-1 text-center">Totals</p>
                   <div className="flex items-center justify-between">
-                      <p className="text-base font-semibold">Tip</p>
-                      <p className="text-2xl font-bold tracking-tight">{formatCurrency(tipAmount)}</p>
+                      <p className="text-sm font-semibold">Tip</p>
+                      <p className="text-xl font-bold tracking-tight">{formatCurrency(tipAmount)}</p>
                   </div>
                   <div className="flex items-center justify-between">
-                      <p className="text-base font-semibold">Bill</p>
-                      <p className="text-2xl font-bold tracking-tight">{formatCurrency(totalAmount)}</p>
+                      <p className="text-sm font-semibold">Bill</p>
+                      <p className="text-xl font-bold tracking-tight">{formatCurrency(totalAmount)}</p>
                   </div>
               </div>
             </div>
 
-            <Button 
-                variant="secondary" 
-                className="w-full mt-4 h-11 text-lg font-bold bg-accent text-accent-foreground transition-transform hover:scale-105 active:scale-100 hover:bg-accent/90 focus-visible:bg-accent/90"
+            <Button
+                variant="secondary"
+                className="w-full mt-3 h-9 text-base font-bold bg-accent text-accent-foreground transition-transform hover:scale-105 active:scale-100 hover:bg-accent/90 focus-visible:bg-accent/90"
                 onClick={resetAll}
                 disabled={billAmount === 0}>
                 Reset
