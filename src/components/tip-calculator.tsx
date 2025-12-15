@@ -228,7 +228,8 @@ export default function TipCalculator() {
           
           {/* Results Section (Inside Card) */}
           <div className="bg-primary text-primary-foreground flex flex-col p-5 rounded-t-3xl shadow-[0_-5px_15px_rgba(0,0,0,0.1)]">
-            <div className="space-y-4">
+            <div className="space-y-6">
+              {/* Per Person Grid */}
               <div>
                 <p className="text-sm font-medium opacity-90 text-center mb-2 uppercase tracking-wide">Per Person</p>
                 <div className="grid grid-cols-2 gap-4">
@@ -243,21 +244,25 @@ export default function TipCalculator() {
                 </div>
               </div>
 
-              <div className="border-t border-primary-foreground/20 pt-3 space-y-1 px-1">
-                <div className="flex items-center justify-between text-sm">
-                    <p className="font-medium opacity-80">Total Tip</p>
-                    <p className="font-bold">{formatCurrency(tipAmount)}</p>
-                </div>
-                <div className="flex items-center justify-between text-sm">
-                    <p className="font-medium opacity-80">Total Bill {isTaxMode && '(w/ Tax)'}</p>
-                    <p className="font-bold">{formatCurrency(totalAmount)}</p>
+              {/* Totals Grid */}
+              <div>
+                <p className="text-sm font-medium opacity-90 text-center mb-2 uppercase tracking-wide">Totals</p>
+                <div className="grid grid-cols-2 gap-4">
+                   <div className="bg-primary-foreground/10 rounded-lg p-3 text-center backdrop-blur-sm">
+                      <p className="text-xs font-semibold opacity-80 mb-1">Total Tip</p>
+                      <p className="text-xl font-bold tracking-tight">{formatCurrency(tipAmount)}</p>
+                   </div>
+                   <div className="bg-primary-foreground/10 rounded-lg p-3 text-center backdrop-blur-sm">
+                      <p className="text-xs font-semibold opacity-80 mb-1">Total Bill</p>
+                      <p className="text-xl font-bold tracking-tight">{formatCurrency(totalAmount)}</p>
+                   </div>
                 </div>
               </div>
             </div>
 
             <Button
                 variant="secondary"
-                className="w-full mt-5 h-10 text-base font-bold bg-accent text-accent-foreground transition-transform hover:scale-[1.02] active:scale-[0.98] hover:bg-accent/90 shadow-md"
+                className="w-full mt-6 h-12 text-lg font-bold bg-accent text-accent-foreground transition-transform hover:scale-[1.02] active:scale-[0.98] hover:bg-accent/90 shadow-md"
                 onClick={resetAll}
                 disabled={mainValue === 0}>
                 Reset
