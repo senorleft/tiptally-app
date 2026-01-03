@@ -128,11 +128,11 @@ export default function TipCalculator() {
       <div className="absolute -top-2 right-0 z-10">
         <ThemeToggle />
       </div>
-      <h1 className="text-2xl font-extrabold text-center mb-4 font-headline text-foreground tracking-widest uppercase bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">TipTally</h1>
+      <h1 className="text-2xl font-extrabold text-center mb-3 font-headline text-foreground tracking-widest uppercase bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">TipTally</h1>
       <Card className="bg-card rounded-2xl shadow-2xl p-0 overflow-hidden w-full border-2 border-border/80 backdrop-blur-sm">
         <div className="flex flex-col">
           {/* Inputs */}
-          <div className="p-5 space-y-6">
+          <div className="p-4 space-y-4">
             
             {/* Bill Input Section */}
             <div className="space-y-3">
@@ -186,7 +186,7 @@ export default function TipCalculator() {
             <Separator />
 
             {/* Tip Selection */}
-            <div className="space-y-3">
+            <div className="space-y-2.5">
               <Label className="text-sm text-foreground/70 font-semibold">Select Tip</Label>
               <div className="grid grid-cols-2 gap-3">
                 <Button 
@@ -259,7 +259,7 @@ export default function TipCalculator() {
             <Separator />
 
             {/* People Count */}
-            <div className="space-y-3">
+            <div className="space-y-2.5">
               <Label htmlFor="people" className="text-sm text-foreground/70 font-semibold">Number of People</Label>
               <div className="flex items-center justify-between bg-input/80 border border-input h-14 rounded-lg px-4">
                 <Button 
@@ -289,14 +289,14 @@ export default function TipCalculator() {
           </div>
           
           {/* Results Section (Inside Card) */}
-          <div className="bg-gradient-to-br from-primary via-primary to-primary/90 text-primary-foreground flex flex-col p-6 rounded-t-3xl shadow-[0_-8px_25px_rgba(0,0,0,0.15)] relative overflow-hidden">
+          <div className="bg-gradient-to-br from-primary via-primary to-primary/90 text-primary-foreground flex flex-col p-5 rounded-t-3xl shadow-[0_-8px_25px_rgba(0,0,0,0.15)] relative overflow-hidden">
             {/* Decorative gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-white/10 pointer-events-none" />
             
-            <div className="space-y-7 relative z-10">
+            <div className="space-y-5 relative z-10">
               {/* Per Person Grid */}
               <div>
-                <p className="text-sm font-semibold opacity-95 text-center mb-3 uppercase tracking-wider">Per Person</p>
+                <p className="text-sm font-semibold opacity-95 text-center mb-2 uppercase tracking-wider">Per Person</p>
                 <div className="grid grid-cols-2 gap-3">
                    <div 
                      key={`tip-per-person-${valueUpdateKey}`}
@@ -317,7 +317,7 @@ export default function TipCalculator() {
 
               {/* Totals Grid */}
               <div>
-                <p className="text-sm font-semibold opacity-95 text-center mb-3 uppercase tracking-wider">Totals</p>
+                <p className="text-sm font-semibold opacity-95 text-center mb-2 uppercase tracking-wider">Totals</p>
                 <div className="grid grid-cols-2 gap-3">
                    <div 
                      key={`total-tip-${valueUpdateKey}`}
@@ -339,7 +339,7 @@ export default function TipCalculator() {
 
             <Button
                 variant="secondary"
-                className="w-full mt-7 h-14 text-lg font-bold bg-gradient-to-r from-accent to-accent/90 text-accent-foreground transition-all hover:scale-[1.02] active:scale-[0.98] hover:shadow-xl hover:shadow-accent/30 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full mt-5 h-14 text-lg font-bold bg-gradient-to-r from-accent to-accent/90 text-accent-foreground transition-all hover:scale-[1.02] active:scale-[0.98] hover:shadow-xl hover:shadow-accent/30 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 onClick={resetAll}
                 disabled={mainValue === 0}>
                 Reset
