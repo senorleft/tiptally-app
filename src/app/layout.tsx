@@ -1,6 +1,7 @@
 import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
+import { ThemeProvider } from "@/components/theme-provider";
 import { Inter } from 'next/font/google';
 
 const inter = Inter({
@@ -26,10 +27,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
       <body className="font-sans antialiased">
-        {children}
-        <Toaster />
+        <ThemeProvider defaultTheme="system" storageKey="tiptally-theme">
+          {children}
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );

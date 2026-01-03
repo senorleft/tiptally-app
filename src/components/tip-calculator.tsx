@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { DollarSign, Minus, Plus, Users, Percent, Receipt } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import { Separator } from '@/components/ui/separator';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 export default function TipCalculator() {
   const [mainAmount, setMainAmount] = useState(''); // Acts as Total in simple mode, Subtotal in tax mode
@@ -123,7 +124,10 @@ export default function TipCalculator() {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto font-sans">
+    <div className="w-full max-w-md mx-auto font-sans relative">
+      <div className="absolute -top-2 right-0 z-10">
+        <ThemeToggle />
+      </div>
       <h1 className="text-2xl font-extrabold text-center mb-4 font-headline text-foreground tracking-widest uppercase bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">TipTally</h1>
       <Card className="bg-card rounded-2xl shadow-xl p-0 overflow-hidden w-full border border-border/50">
         <div className="flex flex-col">
