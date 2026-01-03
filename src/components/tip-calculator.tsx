@@ -328,10 +328,10 @@ export default function TipCalculator() {
                    </div>
                    <div 
                      key={`total-bill-${valueUpdateKey}`}
-                     className="bg-gradient-to-br from-accent/20 to-accent/10 rounded-xl p-4 text-center backdrop-blur-sm border-2 border-accent/30 shadow-lg animate-value-update"
+                     className="bg-gradient-to-br from-orange-500/25 to-orange-400/15 rounded-xl p-4 text-center backdrop-blur-sm border-2 border-orange-500/40 shadow-lg animate-value-update dark:from-orange-500/30 dark:to-orange-400/20 dark:border-orange-500/50"
                    >
                       <p className="text-xs font-semibold opacity-90 mb-1.5">Total Bill</p>
-                      <p className="text-2xl font-bold tracking-tight text-accent-foreground">{formatCurrency(totalAmount)}</p>
+                      <p className="text-2xl font-bold tracking-tight text-orange-600 dark:text-orange-400">{formatCurrency(totalAmount)}</p>
                    </div>
                 </div>
               </div>
