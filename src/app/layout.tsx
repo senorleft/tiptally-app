@@ -12,6 +12,12 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'TipTally | Tip Calculator',
   description: 'A modern, mobile-first tip calculator built with Next.js.',
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+    viewportFit: 'cover',
+  },
 };
 
 export default function RootLayout({
