@@ -129,7 +129,7 @@ export default function TipCalculator() {
         <ThemeToggle />
       </div>
       <h1 className="text-2xl font-extrabold text-center mb-4 font-headline text-foreground tracking-widest uppercase bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">TipTally</h1>
-      <Card className="bg-card rounded-2xl shadow-xl p-0 overflow-hidden w-full border border-border/50">
+      <Card className="bg-card rounded-2xl shadow-2xl p-0 overflow-hidden w-full border-2 border-border/80 backdrop-blur-sm">
         <div className="flex flex-col">
           {/* Inputs */}
           <div className="p-5 space-y-6">
@@ -140,12 +140,13 @@ export default function TipCalculator() {
                 <Label htmlFor="main-amount" className="text-sm text-foreground/70 font-semibold">
                   {isTaxMode ? 'Bill Subtotal' : 'Bill Total'}
                 </Label>
-                <div className="flex items-center space-x-2">
-                  <Label htmlFor="tax-mode" className="text-xs text-muted-foreground">Pre-tax Tip?</Label>
+                <div className="flex items-center space-x-2 bg-secondary/50 px-2 py-1 rounded-md border border-border/60">
+                  <Label htmlFor="tax-mode" className="text-xs text-foreground/80 font-medium">Pre-tax Tip?</Label>
                   <Switch
                     id="tax-mode"
                     checked={isTaxMode}
                     onCheckedChange={(checked) => setIsTaxMode(checked)}
+                    className="data-[state=checked]:bg-primary"
                   />
                 </div>
               </div>
@@ -243,12 +244,15 @@ export default function TipCalculator() {
                 </div>
               </div>
               <div className="flex items-center justify-end space-x-2 pt-1">
-                <Label htmlFor="custom-tip-mode" className="text-xs text-muted-foreground">Tip in $</Label>
-                <Switch
-                  id="custom-tip-mode"
-                  checked={customTipMode === 'dollar'}
-                  onCheckedChange={(checked) => setCustomTipMode(checked ? 'dollar' : 'percent')}
-                />
+                <div className="flex items-center space-x-2 bg-secondary/50 px-2 py-1 rounded-md border border-border/60">
+                  <Label htmlFor="custom-tip-mode" className="text-xs text-foreground/80 font-medium">Tip in $</Label>
+                  <Switch
+                    id="custom-tip-mode"
+                    checked={customTipMode === 'dollar'}
+                    onCheckedChange={(checked) => setCustomTipMode(checked ? 'dollar' : 'percent')}
+                    className="data-[state=checked]:bg-primary"
+                  />
+                </div>
               </div>
             </div>
 
