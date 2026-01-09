@@ -261,77 +261,77 @@ export default function TipCalculator() {
             {/* People Count */}
             <div className="space-y-2.5">
               <Label htmlFor="people" className="text-sm text-foreground/70 font-semibold">Number of People</Label>
-              <div className="flex items-center justify-between bg-input/80 border border-input h-14 rounded-lg px-4">
+              <div className="flex items-center justify-between bg-input/80 border border-input h-12 rounded-lg px-4">
                 <Button 
                   variant="ghost" 
                   size="icon" 
                   onClick={() => handlePeopleChange(-1)} 
                   aria-label="Decrement number of people" 
-                  className="text-primary hover:text-primary hover:bg-primary/10 rounded-full h-9 w-9 transition-all active:scale-90"
+                  className="text-primary hover:text-primary hover:bg-primary/10 rounded-full h-8 w-8 transition-all active:scale-90"
                 >
-                  <Minus className="h-5 w-5" />
+                  <Minus className="h-4 w-4" />
                 </Button>
-                <div className='flex items-center gap-2.5'>
-                  <Users className="h-5 w-5 text-primary/70" />
-                  <span id="people" className="text-2xl font-bold tabular-nums text-foreground">{people}</span>
+                <div className='flex items-center gap-2'>
+                  <Users className="h-4 w-4 text-primary/70" />
+                  <span id="people" className="text-xl font-bold tabular-nums text-foreground">{people}</span>
                 </div>
                 <Button 
                   variant="ghost" 
                   size="icon" 
                   onClick={() => handlePeopleChange(1)} 
                   aria-label="Increment number of people" 
-                  className="text-primary hover:text-primary hover:bg-primary/10 rounded-full h-9 w-9 transition-all active:scale-90"
+                  className="text-primary hover:text-primary hover:bg-primary/10 rounded-full h-8 w-8 transition-all active:scale-90"
                 >
-                  <Plus className="h-5 w-5" />
+                  <Plus className="h-4 w-4" />
                 </Button>
               </div>
             </div>
           </div>
           
           {/* Results Section (Inside Card) */}
-          <div className="bg-gradient-to-br from-primary via-primary to-primary/90 text-primary-foreground flex flex-col p-5 rounded-t-3xl shadow-[0_-8px_25px_rgba(0,0,0,0.15)] relative overflow-hidden">
+          <div className="bg-gradient-to-br from-primary via-primary to-primary/90 text-primary-foreground flex flex-col p-3 rounded-t-3xl shadow-[0_-8px_25px_rgba(0,0,0,0.15)] relative overflow-hidden">
             {/* Decorative gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-white/10 pointer-events-none" />
             
-            <div className="space-y-5 relative z-10">
+            <div className="space-y-3 relative z-10">
               {/* Per Person Grid */}
               <div>
-                <p className="text-sm font-semibold opacity-95 text-center mb-2 uppercase tracking-wider">Per Person</p>
-                <div className="grid grid-cols-2 gap-3">
+                <p className="text-xs font-semibold opacity-95 text-center mb-1.5 uppercase tracking-wider">Per Person</p>
+                <div className="grid grid-cols-2 gap-2.5">
                    <div 
                      key={`tip-per-person-${valueUpdateKey}`}
-                     className="bg-primary-foreground/15 rounded-xl p-4 text-center backdrop-blur-sm border border-primary-foreground/20 shadow-lg animate-value-update"
+                     className="bg-primary-foreground/15 rounded-lg p-2.5 text-center backdrop-blur-sm border border-primary-foreground/20 shadow-lg animate-value-update"
                    >
-                      <p className="text-xs font-semibold opacity-90 mb-1.5">Tip</p>
-                      <p className="text-2xl font-bold tracking-tight">{formatCurrency(tipPerPerson)}</p>
+                      <p className="text-xs font-semibold opacity-90 mb-1">Tip</p>
+                      <p className="text-xl font-bold tracking-tight">{formatCurrency(tipPerPerson)}</p>
                    </div>
                    <div 
                      key={`total-per-person-${valueUpdateKey}`}
-                     className="bg-primary-foreground/15 rounded-xl p-4 text-center backdrop-blur-sm border border-primary-foreground/20 shadow-lg animate-value-update"
+                     className="bg-primary-foreground/15 rounded-lg p-2.5 text-center backdrop-blur-sm border border-primary-foreground/20 shadow-lg animate-value-update"
                    >
-                      <p className="text-xs font-semibold opacity-90 mb-1.5">Total</p>
-                      <p className="text-2xl font-bold tracking-tight">{formatCurrency(totalPerPerson)}</p>
+                      <p className="text-xs font-semibold opacity-90 mb-1">Total</p>
+                      <p className="text-xl font-bold tracking-tight">{formatCurrency(totalPerPerson)}</p>
                    </div>
                 </div>
               </div>
 
               {/* Totals Grid */}
               <div>
-                <p className="text-sm font-semibold opacity-95 text-center mb-2 uppercase tracking-wider">Totals</p>
-                <div className="grid grid-cols-2 gap-3">
+                <p className="text-xs font-semibold opacity-95 text-center mb-1.5 uppercase tracking-wider">Totals</p>
+                <div className="grid grid-cols-2 gap-2.5">
                    <div 
                      key={`total-tip-${valueUpdateKey}`}
-                     className="bg-primary-foreground/15 rounded-xl p-4 text-center backdrop-blur-sm border border-primary-foreground/20 shadow-lg animate-value-update"
+                     className="bg-primary-foreground/15 rounded-lg p-2.5 text-center backdrop-blur-sm border border-primary-foreground/20 shadow-lg animate-value-update"
                    >
-                      <p className="text-xs font-semibold opacity-90 mb-1.5">Total Tip</p>
-                      <p className="text-2xl font-bold tracking-tight">{formatCurrency(tipAmount)}</p>
+                      <p className="text-xs font-semibold opacity-90 mb-1">Total Tip</p>
+                      <p className="text-xl font-bold tracking-tight">{formatCurrency(tipAmount)}</p>
                    </div>
                    <div 
                      key={`total-bill-${valueUpdateKey}`}
-                     className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl p-4 text-center border-2 border-orange-600/80 shadow-lg animate-value-update dark:from-orange-600 dark:to-orange-700 dark:border-orange-700/80"
+                     className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg p-2.5 text-center border-2 border-orange-600/80 shadow-lg animate-value-update dark:from-orange-600 dark:to-orange-700 dark:border-orange-700/80"
                    >
-                      <p className="text-xs font-semibold text-white/90 mb-1.5">Total Bill</p>
-                      <p className="text-2xl font-bold tracking-tight text-white">{formatCurrency(totalAmount)}</p>
+                      <p className="text-xs font-semibold text-white/90 mb-1">Total Bill</p>
+                      <p className="text-xl font-bold tracking-tight text-white">{formatCurrency(totalAmount)}</p>
                    </div>
                 </div>
               </div>
@@ -339,7 +339,7 @@ export default function TipCalculator() {
 
             <Button
                 variant="secondary"
-                className="w-full mt-5 h-14 text-lg font-bold bg-gradient-to-r from-accent to-accent/90 text-accent-foreground transition-all hover:scale-[1.02] active:scale-[0.98] hover:shadow-xl hover:shadow-accent/30 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full mt-4 h-14 text-lg font-bold bg-gradient-to-r from-accent to-accent/90 text-accent-foreground transition-all hover:scale-[1.02] active:scale-[0.98] hover:shadow-xl hover:shadow-accent/30 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 onClick={resetAll}
                 disabled={mainValue === 0}>
                 Reset
